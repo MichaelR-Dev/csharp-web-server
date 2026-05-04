@@ -19,16 +19,23 @@ void ParseArgs(string[] args)
     }
     else
     {
-        Console.WriteLine("No command-line arguments provided. Using default values.");
+        Console.WriteLine("\nNo command-line arguments provided. Using default values.");
         Console.WriteLine($"Default Port: {port}");
         Console.WriteLine($"Default IP Address: {localAddr}");
     }
 }
 
 ParseArgs(args);
-Console.WriteLine("Press any key to start the web server...");
-Console.ReadKey();
+Console.WriteLine("\nPress any key to start the web server...\n");
+Console.ReadKey(true);
 Server.StartServer(port, localAddr);
-Console.WriteLine("Press any key to stop the web server...");
-Console.ReadKey();
-Server.StopServer();
+
+while(true)
+{
+    if (Console.ReadKey(true).Key == ConsoleKey.Q)
+    {        
+        Console.WriteLine("Shutting down the server...");
+        Server.StopServer();
+        break;
+    }
+}
